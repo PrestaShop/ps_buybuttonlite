@@ -52,7 +52,7 @@
 
                             <el-form-item :label="translations.sharableLink" class="form-link">
                                 <span v-if="form.selectedProduct && form.selectedAction" class="generated-link">{{ ps_base_url }}/index.php?fc=module&module=ps_buybuttonlite&controller=RedirectManager&id_product={{ form.selectedProduct.id_product }}&action={{ form.selectedAction }}<label v-if="form.selectedProduct.id_product_attribute">&id_product_attribute={{ form.selectedProduct.id_product_attribute }}</label></span>
-                                <span v-else class="no-link">Please select a product and an action</span>
+                                <span v-else class="no-link">{{ translations.linkPlaceholder }}</span>
                             </el-form-item>
                         </el-form>
                     </el-col>
@@ -67,10 +67,10 @@
         </PsCard>
 
         <BannerPromo
-            :id_product_addons="26835"
-            :iso_code="context.country.iso_code"
-            :iso_lang="context.language.iso_code"
-            :ps_version="ps_version"
+            :idProductAddons="26835"
+            :isoCode="context.country.iso_code"
+            :isoLang="context.language.iso_code"
+            :psVersion="ps_version"
             :trackingAddonsLink="trackingAddonsLink"
         >
             <el-row>
@@ -122,13 +122,13 @@ export default {
             },
             rulesForm: {
                 selectedProduct: [
-                    { required: true, message: 'Please select a product', trigger: 'change' }
+                    { required: true, message: translations.errorFormSelectProduct, trigger: 'change' }
                 ],
                 selectedAction: [
-                    { required: true, message: 'Please select an action', trigger: 'change' }
+                    { required: true, message: translations.errorFormSelectAction, trigger: 'change' }
                 ]
             },
-            generatedLink: 'index.php?fc=module&module=ps_buybuttonlite&controller=RedirectManager&idproduct',
+            redirectControllerUrl: redirectControllerUrl,
             context: shopContext,
             translations: translations,
             trackingAddonsLink: trackingAddonsLink,
@@ -140,20 +140,23 @@ export default {
         validateForm: function (formName) {
             this.$refs[formName].validate((valid) => {
                 if (valid) {
-                    this.copyToClopboard(this.ps_base_url + '/index.php?fc=module&module=ps_buybuttonlite&controller=RedirectManager&id_product=' + this.form.selectedProduct.id_product + '&action=' + this.form.selectedAction + '&id_product_attribute=' + this.form.selectedProduct.id_product_attribute)
+                    this.copyToClopboard(this.redirectControllerUrl + '&id_product=' + this.form.selectedProduct.id_product + '&action=' + this.form.selectedAction + '&id_product_attribute=' + this.form.selectedProduct.id_product_attribute)
                 } else {
                     return false
                 }
             })
         },
         querySearchAsync: function (queryString, cb) {
-            var formData = new FormData()
+            const formData = new FormData()
             formData.append('action', 'SearchProducts')
             formData.append('product_search', queryString)
 
             axios.post(adminAjaxController, formData)
                 .then((response) => {
                     cb(response.data)
+                })
+                .catch(function (error) {
+                    console.log(error)
                 })
         },
         handleSelect: function (item) {

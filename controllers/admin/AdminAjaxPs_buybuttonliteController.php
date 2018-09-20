@@ -1,6 +1,6 @@
 <?php
 /**
-* 2007-2016 PrestaShop
+* 2007-2018 PrestaShop
 *
 * DISCLAIMER
 *
@@ -9,20 +9,58 @@
 * needs please refer to http://www.prestashop.com for more information.
 *
 * @author    PrestaShop SA <contact@prestashop.com>
-* @copyright 2007-2015 PrestaShop SA
+* @copyright 2007-2018 PrestaShop SA
 * @license   http://addons.prestashop.com/en/content/12-terms-and-conditions-of-use
 * International Registered Trademark & Property of PrestaShop SA
 */
 
 class AdminAjaxPs_buybuttonliteController extends ModuleAdminController
 {
+    /**
+     * Return product / product list matching the search
+     *
+     * @param string $query Product to search
+     *
+     * @return json
+     */
     public function ajaxProcessSearchProducts()
     {
         $context = Context::getContext();
         $id_lang = $context->language->id;
-        $id_shop = $context->shop->id;
-        $query = pSQL(Tools::getValue('product_search'));
 
+        $query = Tools::getValue('product_search');
+
+        $result = $this->getSqlQuery($query, $id_lang);
+
+        if (!$result) {
+            return false;
+        }
+
+        $productList = [];
+
+        foreach ($result as $row) {
+            if ($this->hasCombinations($row['id_product'])) {
+                $row['attribute_name'] = $this->getAttributes($row['id_product_attribute'], $id_lang);
+                $row['image_link'] = $this->getProductAttributeImage($row['id_product'], $row['id_product_attribute']);
+            } else {
+                $row['image_link'] = $this->getProductImage($row['id_product']);
+            }
+            $productList[] = $row;
+        }
+
+        $this->ajaxDie(json_encode($productList));
+    }
+
+    /**
+     * Build the sql querry and return result
+     *
+     * @param string $query Product to search
+     * @param int $id_lang
+     *
+     * @return array
+     */
+    public function getSqlQuery($query, $id_lang)
+    {
         $sql = new DbQuery();
         $sql->select('p.`id_product`, pa.`id_product_attribute`, pl.`name`, p.`reference`');
         $sql->from('product', 'p');
@@ -40,36 +78,40 @@ class AdminAjaxPs_buybuttonliteController extends ModuleAdminController
             $where .= ' OR EXISTS(SELECT * FROM `' . _DB_PREFIX_ . 'product_attribute` `pa` WHERE pa.`id_product` = p.`id_product` AND (pa.`reference` LIKE \'%' . pSQL($query) . '%\'))';
         }
         $sql->where($where);
-        $result = Db::getInstance()->executeS($sql);
-        if (!$result) {
-            return false;
-        }
-        $results_array = array();
-        foreach ($result as $row) {
-            if ($this->hasCombinations($row['id_product'])) {
-                $row['attribute_name'] = $this->getAttributes($row['id_product_attribute'], $id_lang);
-                $row['image_link'] = $this->getProductAttributeImage($row['id_product'], $row['id_product_attribute']);
-            } else {
-                $row['image_link'] = $this->getProductImage($row['id_product']);
-            }
-            $results_array[] = $row;
-        }
-        $this->content = json_encode($results_array);
+
+        return Db::getInstance()->executeS($sql);
     }
 
+    /**
+     * Get product cover image
+     *
+     * @param int $id_product id product
+     *
+     * @return string image link
+     */
     public function getProductImage($id_product)
     {
         $product = new Product($id_product);
         $link_rewrite = $product->link_rewrite;
+
         $link = new Link();
-        $id_image = Image::getCover($id_product);
-        $id_image = $id_image['id_image'];
+
+        $image_data = Image::getCover($id_product);
+        $id_image = $image_data['id_image'];
 
         $image_link = $link->getImageLink($link_rewrite, $id_image, ImageType::getFormattedName('small'));
 
         return Tools::getProtocol().$image_link;
     }
 
+    /**
+     * Get product attribute image
+     *
+     * @param int $id_product id product
+     * @param int $id_product_attribute id product attribute
+     *
+     * @return string image link
+     */
     public function getProductAttributeImage($id_product, $id_product_attribute)
     {
         $context = Context::getContext();
@@ -78,24 +120,42 @@ class AdminAjaxPs_buybuttonliteController extends ModuleAdminController
 
         $product = new Product($id_product);
         $link_rewrite = $product->link_rewrite;
+
         $link = new Link();
-        $id_image = Image::getBestImageAttribute($id_shop, $id_lang, $id_product, $id_product_attribute);
-        $id_image = $id_image['id_image'];
+
+        $image_data = Image::getBestImageAttribute($id_shop, $id_lang, $id_product, $id_product_attribute);
+        $id_image = $image_data['id_image'];
 
         $image_link = $link->getImageLink($link_rewrite, $id_image, ImageType::getFormattedName('small'));
 
         return Tools::getProtocol().$image_link;
     }
 
+    /**
+     * Check if product has combinations
+     *
+     * @param int $id_product id product
+     *
+     * @return bool
+     */
     public function hasCombinations($id_product)
     {
         if (is_null($id_product) || 0 >= $id_product) {
             return false;
         }
+
         $attributes = Product::getAttributesInformationsByProduct($id_product);
+
         return !empty($attributes);
     }
 
+    /**
+     * Get attributes assicuate to a product attribute id
+     *
+     * @param int $id_product_attribute id product attribute
+     *
+     * @return array
+     */
     public function getAttributes($id_product_attribute, $id_lang)
     {
         $sql = 'SELECT agl.name as label, al.name as value
@@ -108,9 +168,11 @@ class AdminAjaxPs_buybuttonliteController extends ModuleAdminController
 
         $results = Db::getInstance(_PS_USE_SQL_SLAVE_)->executeS($sql);
 
+        $attributes = [];
         foreach ($results as $attribute) {
             $attributes[] = implode($attribute, ' - ');
         }
+
         $attributesList = implode($attributes, ', ');
 
         return $attributesList;

@@ -56,10 +56,10 @@ export default {
         }
     },
     props: {
-        id_product_addons: Number,
-        iso_code: String,
-        iso_lang: String,
-        ps_version: String,
+        idProductAddons: Number,
+        isoCode: String,
+        isoLang: String,
+        psVersion: String,
         trackingAddonsLink: String
     },
     created: function () {
@@ -67,13 +67,15 @@ export default {
             params: {
                 method: 'prediggo',
                 action: 'product',
-                iso_lang: this.iso_lang,
-                iso_code: this.iso_code,
-                version: this.ps_version,
-                id_product: this.id_product_addons
+                iso_lang: this.isoLang,
+                iso_code: this.isoCode,
+                version: this.psVersion,
+                id_product: this.idProductAddons
             }
         }).then((response) => {
             this.product = response.data
+        }).catch((error) => {
+            console.log(error)
         })
     },
     methods: {

@@ -19,16 +19,17 @@ class ps_buybuttonliteRedirectManagerModuleFrontController extends ModuleFrontCo
     public function initContent()
     {
         parent::initContent();
+
         $id_product = (int)Tools::getValue('id_product');
         $id_product_attribute = (int)Tools::getValue('id_product_attribute');
         $action = (int)Tools::getValue('action');
 
 
         switch ($action) {
-            case '1':
+            case 1:
                 Tools::redirect('index.php?controller=cart&update=1&id_product='.$id_product.'&id_product_attribute='.$id_product_attribute);
                 break;
-            case '2':
+            case 2:
                 $cart = $this->context->cart;
                 if (!Validate::isLoadedObject($cart)) {
                     Tools::redirect('index');

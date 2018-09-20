@@ -47,14 +47,14 @@ class Ps_BuybuttonLite extends Module
         $this->controllerAdmin = 'AdminAjaxPs_buybuttonlite';
 
         $this->displayName = $this->trans('Buy button lite', array(), 'Modules.Buybuttonlite.Admin');
-        $this->description = $this->trans('Create a product checkout redirect link to post on a blog or any social media', array(), 'Modules.Buybuttonlite.Admin');
+        $this->description = $this->trans('Increase your conversation rate and boost your sales, generate links and add them to your content so that visitors can easily proceed to checkout', array(), 'Modules.Buybuttonlite.Admin');
         $this->ps_version = (bool)version_compare(_PS_VERSION_, '1.7', '>=');
 
         // Settings paths
         $this->css_path = $this->_path.'views/css/';
 
         // Confirm uninstall
-        $this->confirmUninstall = $this->trans('Are you sure you want to uninstall this module?', array(), 'Modules.Buybuttonlite.Admin');
+        $this->confirmUninstall = $this->trans('Are you sure you want to uninstall this module?', array(), 'Modules.Legalcompliance.Admin');
         $this->ps_versions_compliancy = array('min' => '1.7', 'max' => _PS_VERSION_);
     }
 
@@ -66,11 +66,7 @@ class Ps_BuybuttonLite extends Module
      */
     public function install()
     {
-        if (parent::install() &&
-            $this->installTab()) {
-                return true;
-        }
-        return false;
+        return parent::install() && $this->installTab();
     }
 
     /**
@@ -81,11 +77,7 @@ class Ps_BuybuttonLite extends Module
      */
     public function uninstall()
     {
-        if (parent::uninstall() &&
-            $this->uninstallTab()) {
-            return true;
-        }
-        return false;
+        return parent::uninstall() && $this->uninstallTab();
     }
 
     /**
@@ -120,9 +112,7 @@ class Ps_BuybuttonLite extends Module
         $id_tab = (int)Tab::getIdFromClassName($this->controllerAdmin);
         $tab = new Tab($id_tab);
         if (Validate::isLoadedObject($tab)) {
-            return ($tab->delete());
-        } else {
-            return false;
+            return $tab->delete();
         }
     }
 
@@ -135,7 +125,7 @@ class Ps_BuybuttonLite extends Module
     public function loadAsset()
     {
         $css = array(
-            'https://unpkg.com/element-ui/lib/theme-chalk/index.css',
+            'https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.4.7/theme-chalk/index.css',
             $this->css_path.'override-element-ui.css',
             $this->css_path.'back.css',
         );
@@ -153,31 +143,28 @@ class Ps_BuybuttonLite extends Module
         $link = new Link();
         $adminAjaxController = $link->getAdminLink($this->controllerAdmin);
 
-        $availableTranckingLanguage = array('en', 'fr', 'es', 'it', 'de', 'nl', 'pt', 'pl', 'ru');
-
-        $iso_code = 'en';
-        if (in_array($this->context->language->iso_code, $availableTranckingLanguage)) {
-            $iso_code = $this->context->language->iso_code;
-        }
-        $trackingAddons = 'https://addons.prestashop.com/'.$iso_code.'/blog-forum-actualites/41139-buy-button.html?utm_source=back-office&utm_medium=native-module&utm_campaign=back-office-'.strtoupper($iso_code).'&utm_content=Permalink';
+        $trackingAddonsUrl = $this->getAddonsTrackingUrl();
 
         $confTranslations = array(
             'selectProduct' => $this->trans('Select Product', array(), 'Modules.Buybuttonlite.Admin'),
-            'searchProduct' => $this->trans('Search Product', array(), 'Modules.Buybuttonlite.Admin'),
-            'action' => $this->trans('Select action', array(), 'Modules.Buybuttonlite.Admin'),
+            'searchProduct' => $this->trans('Search for a product', array(), 'Admin.Orderscustomers.Feature'),
+            'action' => $this->trans('Action', array(), 'Admin.Global'),
             'sharableLink' => $this->trans('Get sharable link', array(), 'Modules.Buybuttonlite.Admin'),
+            'errorFormSelectProduct' => $this->trans('Please select a product', array(), 'Modules.Buybuttonlite.Admin'),
+            'errorFormSelectAction' => $this->trans('Please select an action', array(), 'Modules.Buybuttonlite.Admin'),
             'copyToClipboard' => $this->trans('Copy to clipboard', array(), 'Modules.Buybuttonlite.Admin'),
+            'linkPlaceholder' => $this->trans('Please select a product and an action', array(), 'Modules.Buybuttonlite.Admin'),
             'linkCopied' => $this->trans('Link copied to clipboard', array(), 'Modules.Buybuttonlite.Admin'),
         );
 
         $bannerPromoTranslations = array(
-            'copyToClipboard' => $this->trans('Copy to clipboard', array(), 'Modules.Buybuttonlite.Admin'),
-            'discover' => $this->trans('Discover', array(), 'Modules.Buybuttonlite.Admin'),
+            'copyToClipboard' => $this->trans('Copy to clipboard', array(), 'Admin.Global'),
+            'discover' => $this->trans('Discover', array(), 'Admin.Modules.Feature'),
             'screenshots' => $this->trans('Screenshots', array(), 'Modules.Buybuttonlite.Admin'),
-            'goFurther' => $this->trans('To go further', array(), 'Modules.Buybuttonlite.Admin'),
-            'addonsMarketplace' => $this->trans('Addons marketplace', array(), 'Modules.Buybuttonlite.Admin'),
-            'discoverOn' => $this->trans('Discover on Addons Marketplace', array(), 'Modules.Buybuttonlite.Admin'),
-            'developedBy' => $this->trans('Developed by PrestaShop', array(), 'Modules.Buybuttonlite.Admin')
+            'goFurther' => $this->trans('Want to go further', array(), 'Modules.Buybuttonlite.Admin'),
+            'addonsMarketplace' => $this->trans('PrestaShop Addons Marketplace', array(), 'Admin.Modules.Feature'),
+            'discoverOn' => $this->trans('Discover on Addons Marketplace', array(), 'Admin.Modules.Feature'),
+            'developedBy' => $this->trans('Developed by PrestaShop', array(), 'Admin.Global')
         );
 
         Media::addJsDef(array(
@@ -185,7 +172,8 @@ class Ps_BuybuttonLite extends Module
             'confTranslations' => json_encode($confTranslations),
             'bannerPromoTranslations' => json_encode($bannerPromoTranslations),
             'adminAjaxController' => $adminAjaxController,
-            'trackingAddonsLink' => $trackingAddons,
+            'trackingAddonsLink' => $trackingAddonsUrl,
+            'redirectControllerUrl' => $this->context->link->getModuleLink($this->name, 'RedirectManager', array(), true),
             'psBaseUrl' => Tools::getHttpHost(true),
             'psVersion' => _PS_VERSION_
         ));
@@ -193,5 +181,17 @@ class Ps_BuybuttonLite extends Module
         $this->context->smarty->assign('modulePath', $this->_path);
 
         return $this->context->smarty->fetch($this->local_path.'views/templates/admin/app.tpl');
+    }
+
+    public function getAddonsTrackingUrl()
+    {
+        $availableTrackingLanguage = array('en', 'fr', 'es', 'it', 'de', 'nl', 'pt', 'pl', 'ru');
+
+        $iso_code = 'en';
+        if (in_array($this->context->language->iso_code, $availableTrackingLanguage)) {
+            $iso_code = $this->context->language->iso_code;
+        }
+
+        return 'https://addons.prestashop.com/'.$iso_code.'/blog-forum-actualites/41139-buy-button.html?utm_source=back-office&utm_medium=native-module&utm_campaign=back-office-'.strtoupper($iso_code).'&utm_content=Permalink';
     }
 }
