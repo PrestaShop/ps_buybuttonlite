@@ -16,46 +16,35 @@
 
 class ps_buybuttonliteRedirectManagerModuleFrontController extends ModuleFrontController
 {
+    const REDIRECT_TO_CART = 1;
+    const REDIRECT_TO_CHECKOUT = 2;
+
     public function initContent()
     {
         parent::initContent();
 
-        $id_product = (int)Tools::getValue('id_product');
-        $id_product_attribute = (int)Tools::getValue('id_product_attribute');
+        $idProduct = (int)Tools::getValue('id_product');
+        $idProductAttribute = (int)Tools::getValue('id_product_attribute');
         $action = (int)Tools::getValue('action');
 
-
         switch ($action) {
-            case 1:
-                Tools::redirect('index.php?controller=cart&update=1&id_product='.$id_product.'&id_product_attribute='.$id_product_attribute);
+            case self::REDIRECT_TO_CART:
+                Tools::redirect('index.php?controller=cart&update=1&id_product='.$idProduct.'&id_product_attribute='.$idProductAttribute);
                 break;
-            case 2:
+            case self::REDIRECT_TO_CHECKOUT:
                 $cart = $this->context->cart;
                 if (!Validate::isLoadedObject($cart)) {
                     Tools::redirect('index');
                 }
 
-                $cart->updateQty(1, $id_product, $id_product_attribute);
+                $cart->updateQty(1, $idProduct, $idProductAttribute);
                 $cart->save();
 
                 Tools::redirect('index.php?controller=order');
                 break;
             default:
-                Tools::redirect('index.php?controller=cart&update=1&id_product='.$id_product.'&id_product_attribute='.$id_product_attribute);
+                Tools::redirect('index.php?controller=cart&update=1&id_product='.$idProduct.'&id_product_attribute='.$idProductAttribute);
                 break;
         }
-    }
-
-    /**
-     * Check if product exist
-     *
-     * @param int $id_product Id product
-     * @param int $id_product_attribute id product attribute
-     *
-     * @return bool
-     */
-    public function checkParams($id_product, $id_product_attribute = null)
-    {
-        // TO DO : check if product exist, if it is active and check quantity available
     }
 }

@@ -183,6 +183,12 @@ class Ps_BuybuttonLite extends Module
         return $this->context->smarty->fetch($this->local_path.'views/templates/admin/app.tpl');
     }
 
+    /**
+     * Generate addons url tracking depending the language
+     *
+     * @param none
+     * @return string url tracking addons
+     */
     public function getAddonsTrackingUrl()
     {
         $availableTrackingLanguage = array('en', 'fr', 'es', 'it', 'de', 'nl', 'pt', 'pl', 'ru');

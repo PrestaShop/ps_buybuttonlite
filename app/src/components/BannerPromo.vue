@@ -24,16 +24,16 @@
         </el-row>
 
         <el-dialog id="dialog-preview-addons" :visible.sync="dialogDiscover">
-            <el-carousel id="screenshot-preview-addons" :interval="5000" height="800px" arrow="always" indicator-position="none">
-                <el-carousel-item v-for="picture in product.pictures" :key="parseInt(picture)">
-                    <img :src="picture.big" width="" height="">
+            <el-carousel id="screenshot-preview-addons" :interval="5000" height="66.67vh" arrow="always" indicator-position="none">
+                <el-carousel-item v-for="picture in product.pictures" :key="parseInt(picture)" :style="'background-image:url('+picture.big+')'">
+                    <!-- <img :src="picture.big" width="" height=""> -->
                 </el-carousel-item>
             </el-carousel>
             <el-row class="dialog-preview-addons-footer" type="flex" justify="center">
-                <el-col :xs="12" :sm="12" :md="12" :lg="12">
+                <el-col :xs="24" :sm="24" :md="12" :lg="12">
                     <el-button class="by-prestashop" type="text" @click="dialogDiscover = true"><i class="material-icons" style="vertical-align:middle">check_circle</i> {{ translations.developedBy }}</el-button>
                 </el-col>
-                <el-col :xs="12" :sm="12" :md="12" :lg="12">
+                <el-col :xs="24" :sm="24" :md="12" :lg="12">
                     <el-button class="right" type="primary" @click="redirectToAddons()">{{ translations.discoverOn }}</el-button>
                 </el-col>
             </el-row>
@@ -130,6 +130,9 @@ export default {
 </style>
 
 <style lang="scss">
+#dialog-preview-addons .el-dialog {
+    width: 100vh !important;
+}
 #dialog-preview-addons .el-dialog__header {
     padding: 0 !important;
 }
