@@ -67,7 +67,7 @@
         </PsCard>
 
         <BannerPromo
-            :idProductAddons="26835"
+            :idProductAddons="41139"
             :isoCode="context.country.iso_code"
             :isoLang="context.language.iso_code"
             :psVersion="ps_version"
@@ -147,7 +147,7 @@ export default {
             })
         },
         querySearchAsync: function (queryString, cb) {
-            let formData = new FormData()
+            const formData = new FormData()
             formData.append('action', 'SearchProducts')
             formData.append('product_search', queryString)
 
@@ -155,7 +155,7 @@ export default {
                 .then((response) => {
                     cb(response.data)
                 })
-                .catch(function (error) {
+                .catch((error) => {
                     console.log(error)
                 })
         },

@@ -1,5 +1,5 @@
 <template>
-    <div v-show="product" class="banner-block">
+    <div v-show="Object.keys(product).length > 0" class="banner-block">
         <el-row justify="center" :gutter="50">
             <el-col :xs="24" :sm="24" :md="8" :lg="6">
                     <div style="display:inline-flex;">

@@ -127,6 +127,7 @@ class Ps_BuybuttonLite extends Module
         $css = array(
             'https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.4.7/theme-chalk/index.css',
             $this->css_path.'override-element-ui.css',
+            $this->css_path.'app.css',
             $this->css_path.'back.css',
         );
 
