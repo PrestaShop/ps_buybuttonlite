@@ -174,7 +174,7 @@ class Ps_BuybuttonLite extends Module
             'bannerPromoTranslations' => json_encode($bannerPromoTranslations),
             'adminAjaxController' => $adminAjaxController,
             'trackingAddonsLink' => $trackingAddonsUrl,
-            'redirectControllerUrl' => $this->context->link->getModuleLink($this->name, 'RedirectManager', array(), true),
+            'redirectControllerUrl' => preg_replace('#&id_lang=[0-9]{1,2}$#', '', $this->context->link->getModuleLink($this->name, 'RedirectManager', array(), true)),
             'psBaseUrl' => Tools::getHttpHost(true),
             'psVersion' => _PS_VERSION_
         ));

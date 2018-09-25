@@ -29,22 +29,53 @@ class ps_buybuttonliteRedirectManagerModuleFrontController extends ModuleFrontCo
 
         switch ($action) {
             case self::REDIRECT_TO_CART:
-                Tools::redirect('index.php?controller=cart&update=1&id_product='.$idProduct.'&id_product_attribute='.$idProductAttribute);
+                $this->redirectToCart($idProduct, $idProductAttribute);
                 break;
             case self::REDIRECT_TO_CHECKOUT:
-                $cart = $this->context->cart;
-                if (!Validate::isLoadedObject($cart)) {
-                    Tools::redirect('index');
-                }
-
-                $cart->updateQty(1, $idProduct, $idProductAttribute);
-                $cart->save();
-
-                Tools::redirect('index.php?controller=order');
+                $this->redirectToCheckout($idProduct, $idProductAttribute);
                 break;
             default:
-                Tools::redirect('index.php?controller=cart&update=1&id_product='.$idProduct.'&id_product_attribute='.$idProductAttribute);
+                $this->redirectToCart($idProduct, $idProductAttribute);
                 break;
         }
+    }
+
+    /**
+     * Redirect to the cart with the product
+     *
+     * @param int $idProduct id of the product to add in the cart
+     * @param int $idProductAttribute id of the product attribute if the product is a combination
+     *
+     * @return none Redirect to the cart
+     */
+    public function redirectToCart($idProduct, $idProductAttribute = null)
+    {
+        Tools::redirect('index.php?controller=cart&update=1&id_product='.$idProduct.'&id_product_attribute='.$idProductAttribute);
+    }
+
+    /**
+     * Redirect to the checkout page with the product
+     *
+     * @param int $idProduct id of the product to add in the cart
+     * @param int $idProductAttribute id of the product attribute if the product is a combination
+     *
+     * @return none Redirect to the checkout
+     */
+    public function redirectToCheckout($idProduct, $idProductAttribute = null)
+    {
+        if (Validate::isLoadedObject($this->context->cart)) {
+            $this->context->cart->updateQty(1, $idProduct, $idProductAttribute);
+        } else {
+            $cart = new Cart();
+            $cart->id_currency = $this->context->currency->id;
+            $cart->id_lang = $this->context->language->id;
+            $cart->save();
+
+            $this->context->cart = $cart;
+            $this->context->cart->updateQty(1, $idProduct, $idProductAttribute);
+            $this->context->cookie->id_cart = $cart->id;
+        }
+
+        Tools::redirect('index.php?controller=order');
     }
 }
