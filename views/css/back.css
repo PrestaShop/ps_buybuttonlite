@@ -28,7 +28,10 @@
 
 .form-link > .el-form-item__content {
     line-height: initial !important;
-    width: 100%;
+    max-width: 50%;
+    text-align: justify;
+    word-break: break-all;
+    margin-left: 200px;
 }
 .generated-link {
     color: #25B9D7;
@@ -37,6 +40,10 @@
     font-weight: 700;
 }
 .generated-link:hover {
+    color: #3ed2f0;
+}
+
+.generated-link:hover > .generated-link {
     color: #3ed2f0;
 }
 
