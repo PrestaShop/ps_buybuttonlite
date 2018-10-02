@@ -92,7 +92,15 @@ class AdminAjaxPs_buybuttonliteController extends ModuleAdminController
     public function getProductImage($id_product)
     {
         $product = new Product($id_product);
+
         $link_rewrite = $product->link_rewrite;
+        if (is_array($link_rewrite)) {
+            $i = 0;
+            while (empty($product->link_rewrite[$i])) {
+                $i++;
+            }
+            $link_rewrite = $product->link_rewrite[$i];
+        }
 
         $link = new Link();
 
@@ -119,7 +127,15 @@ class AdminAjaxPs_buybuttonliteController extends ModuleAdminController
         $id_shop = $context->shop->id;
 
         $product = new Product($id_product);
+
         $link_rewrite = $product->link_rewrite;
+        if (is_array($link_rewrite)) {
+            $i = 0;
+            while (empty($product->link_rewrite[$i])) {
+                $i++;
+            }
+            $link_rewrite = $product->link_rewrite[$i];
+        }
 
         $link = new Link();
 
