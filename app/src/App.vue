@@ -51,7 +51,7 @@
                             </el-form-item>
 
                             <el-form-item :label="translations.sharableLink" class="form-link">
-                                <span v-if="form.selectedProduct && form.selectedAction" class="generated-link">{{ redirectControllerUrl }}&id_product={{ form.selectedProduct.id_product }}&action={{ form.selectedAction }}<label class="generated-link" v-if="form.selectedProduct.id_product_attribute">&id_product_attribute={{ form.selectedProduct.id_product_attribute }}</label></span>
+                                <span v-if="form.selectedProduct && form.selectedAction" class="generated-link">{{ redirectControllerUrl }}?id_product={{ form.selectedProduct.id_product }}&action={{ form.selectedAction }}<label class="generated-link" v-if="form.selectedProduct.id_product_attribute">&id_product_attribute={{ form.selectedProduct.id_product_attribute }}</label></span>
                                 <span v-else class="no-link">{{ translations.linkPlaceholder }}</span>
                             </el-form-item>
                         </el-form>
