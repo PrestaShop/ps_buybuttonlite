@@ -140,7 +140,7 @@ export default {
         validateForm: function (formName) {
             this.$refs[formName].validate((valid) => {
                 if (valid) {
-                    this.copyToClopboard(this.redirectControllerUrl + '&id_product=' + this.form.selectedProduct.id_product + '&action=' + this.form.selectedAction + '&id_product_attribute=' + this.form.selectedProduct.id_product_attribute)
+                    this.copyToClopboard(this.redirectControllerUrl + '?id_product=' + this.form.selectedProduct.id_product + '&action=' + this.form.selectedAction + '&id_product_attribute=' + this.form.selectedProduct.id_product_attribute)
                 } else {
                     return false
                 }
@@ -187,7 +187,6 @@ export default {
     width: 60%;
 }
 .no-link {
-    line-height: 40px;
     color: #6c868e;
     font-style: italic;
 }
