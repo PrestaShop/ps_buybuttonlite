@@ -93,14 +93,7 @@ class AdminAjaxPs_buybuttonliteController extends ModuleAdminController
     {
         $product = new Product($id_product);
 
-        $link_rewrite = $product->link_rewrite;
-        if (is_array($link_rewrite)) {
-            $i = 0;
-            while (empty($product->link_rewrite[$i])) {
-                $i++;
-            }
-            $link_rewrite = $product->link_rewrite[$i];
-        }
+        $link_rewrite = $this->checkLinkRewrite($product->link_rewrite);
 
         $link = new Link();
 
@@ -128,14 +121,7 @@ class AdminAjaxPs_buybuttonliteController extends ModuleAdminController
 
         $product = new Product($id_product);
 
-        $link_rewrite = $product->link_rewrite;
-        if (is_array($link_rewrite)) {
-            $i = 0;
-            while (empty($product->link_rewrite[$i])) {
-                $i++;
-            }
-            $link_rewrite = $product->link_rewrite[$i];
-        }
+        $link_rewrite = $this->checkLinkRewrite($product->link_rewrite);
 
         $link = new Link();
 
@@ -192,5 +178,24 @@ class AdminAjaxPs_buybuttonliteController extends ModuleAdminController
         $attributesList = implode($attributes, ', ');
 
         return $attributesList;
+    }
+
+    /**
+     * Allow to check if $link_rewrite is an array or not and only return a valid value
+     *
+     * @param array|string $link_rewrite
+     *
+     * @return string
+     */
+    private function checkLinkRewrite($link_rewrite)
+    {
+        $link_rewrite = $link_rewrite;
+
+        if (is_array($link_rewrite)) {
+            $filteredArray = array_filter($link_rewrite);
+            $link_rewrite = current($filteredArray);
+        }
+
+        return $link_rewrite;
     }
 }
