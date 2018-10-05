@@ -27,30 +27,19 @@ class ps_buybuttonliteRedirectManagerModuleFrontController extends ModuleFrontCo
         $idProductAttribute = (int)Tools::getValue('id_product_attribute');
         $action = (int)Tools::getValue('action');
 
+        $this->addProductToCart($idProduct, $idProductAttribute);
+
         switch ($action) {
             case self::REDIRECT_TO_CART:
-                $this->redirectToCart($idProduct, $idProductAttribute);
+                Tools::redirect('index.php?controller=cart&action=show');
                 break;
             case self::REDIRECT_TO_CHECKOUT:
-                $this->redirectToCheckout($idProduct, $idProductAttribute);
+                Tools::redirect('index.php?controller=order');
                 break;
             default:
-                $this->redirectToCart($idProduct, $idProductAttribute);
+                Tools::redirect('index.php?controller=cart&action=show');
                 break;
         }
-    }
-
-    /**
-     * Redirect to the cart with the product
-     *
-     * @param int $idProduct id of the product to add in the cart
-     * @param int $idProductAttribute id of the product attribute if the product is a combination
-     *
-     * @return none Redirect to the cart
-     */
-    public function redirectToCart($idProduct, $idProductAttribute = null)
-    {
-        Tools::redirect('index.php?controller=cart&update=1&id_product='.$idProduct.'&id_product_attribute='.$idProductAttribute);
     }
 
     /**
@@ -59,9 +48,9 @@ class ps_buybuttonliteRedirectManagerModuleFrontController extends ModuleFrontCo
      * @param int $idProduct id of the product to add in the cart
      * @param int $idProductAttribute id of the product attribute if the product is a combination
      *
-     * @return none Redirect to the checkout
+     * @return bool
      */
-    public function redirectToCheckout($idProduct, $idProductAttribute = null)
+    public function addProductToCart($idProduct, $idProductAttribute = null)
     {
         if (Validate::isLoadedObject($this->context->cart)) {
             $this->context->cart->updateQty(1, $idProduct, $idProductAttribute);
@@ -76,6 +65,6 @@ class ps_buybuttonliteRedirectManagerModuleFrontController extends ModuleFrontCo
             $this->context->cookie->id_cart = $cart->id;
         }
 
-        Tools::redirect('index.php?controller=order');
+        return true;
     }
 }
