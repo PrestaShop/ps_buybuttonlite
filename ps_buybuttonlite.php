@@ -161,8 +161,8 @@ class Ps_BuybuttonLite extends Module
         $bannerPromoTranslations = array(
             'copyToClipboard' => $this->trans('Copy to clipboard', array(), 'Admin.Global'),
             'discover' => $this->trans('Discover', array(), 'Admin.Modules.Feature'),
-            'screenshots' => $this->trans('Screenshots', array(), 'Modules.Buybuttonlite.Admin'),
-            'goFurther' => $this->trans('Want to go further', array(), 'Modules.Buybuttonlite.Admin'),
+            'screenshots' => $this->trans('Screenshots', array(), 'Admin.Global'),
+            'goFurther' => $this->trans('Want to go further?', array(), 'Modules.Buybuttonlite.Admin'),
             'addonsMarketplace' => $this->trans('PrestaShop Addons Marketplace', array(), 'Admin.Modules.Feature'),
             'discoverOn' => $this->trans('Discover on Addons Marketplace', array(), 'Admin.Modules.Feature'),
             'developedBy' => $this->trans('Developed by PrestaShop', array(), 'Admin.Global')
