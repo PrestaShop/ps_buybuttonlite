@@ -147,13 +147,13 @@ class Ps_BuybuttonLite extends Module
         $trackingAddonsUrl = $this->getAddonsTrackingUrl();
 
         $confTranslations = array(
-            'selectProduct' => $this->trans('Select Product', array(), 'Modules.Buybuttonlite.Admin'),
+            'selectProduct' => $this->trans('Select a product', array(), 'Modules.Buybuttonlite.Admin'),
             'searchProduct' => $this->trans('Search for a product', array(), 'Admin.Orderscustomers.Feature'),
             'action' => $this->trans('Action', array(), 'Admin.Global'),
             'sharableLink' => $this->trans('Get sharable link', array(), 'Modules.Buybuttonlite.Admin'),
             'errorFormSelectProduct' => $this->trans('Please select a product', array(), 'Modules.Buybuttonlite.Admin'),
             'errorFormSelectAction' => $this->trans('Please select an action', array(), 'Modules.Buybuttonlite.Admin'),
-            'copyToClipboard' => $this->trans('Copy to clipboard', array(), 'Modules.Buybuttonlite.Admin'),
+            'copyToClipboard' => $this->trans('Copy to clipboard', array(), 'Admin.Global'),
             'linkPlaceholder' => $this->trans('Please select a product and an action', array(), 'Modules.Buybuttonlite.Admin'),
             'linkCopied' => $this->trans('Link copied to clipboard', array(), 'Modules.Buybuttonlite.Admin'),
         );
@@ -161,8 +161,8 @@ class Ps_BuybuttonLite extends Module
         $bannerPromoTranslations = array(
             'copyToClipboard' => $this->trans('Copy to clipboard', array(), 'Admin.Global'),
             'discover' => $this->trans('Discover', array(), 'Admin.Modules.Feature'),
-            'screenshots' => $this->trans('Screenshots', array(), 'Modules.Buybuttonlite.Admin'),
-            'goFurther' => $this->trans('Want to go further', array(), 'Modules.Buybuttonlite.Admin'),
+            'screenshots' => $this->trans('Screenshots', array(), 'Admin.Global'),
+            'goFurther' => $this->trans('Want to go further?', array(), 'Modules.Buybuttonlite.Admin'),
             'addonsMarketplace' => $this->trans('PrestaShop Addons Marketplace', array(), 'Admin.Modules.Feature'),
             'discoverOn' => $this->trans('Discover on Addons Marketplace', array(), 'Admin.Modules.Feature'),
             'developedBy' => $this->trans('Developed by PrestaShop', array(), 'Admin.Global')
