@@ -1,70 +1,77 @@
 <template>
     <div id="psbuybuttonlite-content">
-        <PsCard>
-            <PsCardHeader>
-                <i class="material-icons">link</i> Buy button lite
-            </PsCardHeader>
+        <el-row type="flex" justify="center">
+            <el-col :xs="24" :sm="24" :md="24" :lg="20">
+                <PsCard>
+                    <PsCardHeader>
+                        <template slot="headerLeft">
+                            <i class="material-icons">link</i> Buy button lite
+                        </template>
+                    </PsCardHeader>
 
-            <PsCardBlock>
-                <el-row type="flex" justify="center" :gutter="100">
-                    <el-col :xs="24" :sm="18" :md="16" :lg="12">
-                        <el-form ref="form" :rules="rulesForm" :model="form" label-width="200px">
-                            <el-form-item :label="translations.selectProduct" prop="selectedProduct">
-                                <el-autocomplete v-model="product" :fetch-suggestions="querySearchAsync" :trigger-on-focus="false" :placeholder="translations.searchProduct" @select="handleSelect">
-                                    <i slot="suffix" class="material-icons">search</i>
-                                    <template slot-scope="{ item }">
-                                        <div class="product-suggestion">
-                                            <img :src="item.image_link" class="product-suggestion-image" width="50" height="50">
-                                            <div class="product-suggestion-name">
+                    <PsCardBlock>
+                        <el-row type="flex" justify="center" :gutter="100">
+                            <el-col :xs="24" :sm="18" :md="16" :lg="12">
+                                <el-form ref="form" :rules="rulesForm" :model="form" label-width="200px">
+                                    <el-form-item :label="translations.selectProduct" prop="selectedProduct">
+                                        <el-autocomplete v-model="product" :fetch-suggestions="querySearchAsync" :trigger-on-focus="false" :placeholder="translations.searchProduct" @select="handleSelect">
+                                            <i slot="suffix" class="material-icons">search</i>
+                                            <template slot-scope="{ item }">
+                                                <div class="product-suggestion">
+                                                    <img :src="item.image_link" class="product-suggestion-image" width="50" height="50">
+                                                    <div class="product-suggestion-name">
+                                                        <div>
+                                                            <span class="product-suggestion-attributes">{{ item.name }}</span><br>
+                                                            <span v-if="item.attribute_name" class="product-suggestion-attributes">{{ item.attribute_name }}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </template>
+                                        </el-autocomplete>
+                                    </el-form-item>
+
+                                    <el-form-item v-if="form.selectedProduct">
+                                        <div>
+                                            <div class="selected-product-image">
+                                                <img :src="form.selectedProduct.image_link" class="product-suggestion-image" width="75" height="75">
+                                            </div>
+                                            <div class="selected-product-name">
                                                 <div>
-                                                    <span class="product-suggestion-attributes">{{ item.name }}</span><br>
-                                                    <span v-if="item.attribute_name" class="product-suggestion-attributes">{{ item.attribute_name }}</span>
+                                                    <label>{{ form.selectedProduct.name }}</label><br>
+                                                    <label>{{ form.selectedProduct.attribute_name }}</label>
+                                                </div>
+                                                <div class="selected-product-delete">
+                                                    <i class="material-icons red" @click="removeSelectedProduct()">close</i>
                                                 </div>
                                             </div>
                                         </div>
-                                    </template>
-                                </el-autocomplete>
-                            </el-form-item>
+                                    </el-form-item>
+                                    <Alert v-if="form.selectedProduct.customizable == 1" type="warning">{{ translations.alertCustomizableProduct }}</Alert>
 
-                            <el-form-item v-if="form.selectedProduct">
-                                <div>
-                                    <div class="selected-product-image">
-                                        <img :src="form.selectedProduct.image_link" class="product-suggestion-image" width="75" height="75">
-                                    </div>
-                                    <div class="selected-product-name">
-                                        <div>
-                                            <label>{{ form.selectedProduct.name }}</label><br>
-                                            <label>{{ form.selectedProduct.attribute_name }}</label>
-                                        </div>
-                                        <div class="selected-product-delete">
-                                            <i class="material-icons red" @click="removeSelectedProduct()">close</i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </el-form-item>
+                                    <el-form-item :label="translations.action" prop="selectedAction">
+                                        <el-select v-model="form.selectedAction" :placeholder="translations.action" clearable>
+                                            <el-option label="Go to cart" value="1"></el-option>
+                                            <el-option label="Check out" value="2"></el-option>
+                                        </el-select>
+                                    </el-form-item>
 
-                            <el-form-item :label="translations.action" prop="selectedAction">
-                                <el-select v-model="form.selectedAction" :placeholder="translations.action" clearable>
-                                    <el-option label="Go to cart" value="1"></el-option>
-                                    <el-option label="Check out" value="2"></el-option>
-                                </el-select>
-                            </el-form-item>
+                                    <el-form-item :label="translations.sharableLink" class="form-link">
+                                        <span v-if="form.selectedProduct && form.selectedAction" class="generated-link">{{ redirectControllerUrl }}?id_product={{ form.selectedProduct.id_product }}&action={{ form.selectedAction }}<label class="generated-link" v-if="form.selectedProduct.id_product_attribute">&id_product_attribute={{ form.selectedProduct.id_product_attribute }}</label></span>
+                                        <span v-else class="no-link">{{ translations.linkPlaceholder }}</span>
+                                    </el-form-item>
+                                </el-form>
+                            </el-col>
+                        </el-row>
+                    </PsCardBlock>
 
-                            <el-form-item :label="translations.sharableLink" class="form-link">
-                                <span v-if="form.selectedProduct && form.selectedAction" class="generated-link">{{ redirectControllerUrl }}?id_product={{ form.selectedProduct.id_product }}&action={{ form.selectedAction }}<label class="generated-link" v-if="form.selectedProduct.id_product_attribute">&id_product_attribute={{ form.selectedProduct.id_product_attribute }}</label></span>
-                                <span v-else class="no-link">{{ translations.linkPlaceholder }}</span>
-                            </el-form-item>
-                        </el-form>
-                    </el-col>
-                </el-row>
-            </PsCardBlock>
-
-            <PsCardFooter>
-                <template slot="footerRight">
-                    <el-button type="primary" @click="validateForm('form')">{{ translations.copyToClipboard }}</el-button>
-                </template>
-            </PsCardFooter>
-        </PsCard>
+                    <PsCardFooter>
+                        <template slot="footerRight">
+                            <el-button type="primary" @click="validateForm('form')">{{ translations.copyToClipboard }}</el-button>
+                        </template>
+                    </PsCardFooter>
+                </PsCard>
+            </el-col>
+        </el-row>
 
         <BannerPromo
             :idProductAddons="41139"
@@ -99,6 +106,7 @@ import PsCard from '@/components/PsCard.vue'
 import PsCardHeader from '@/components/PsCardHeader.vue'
 import PsCardBlock from '@/components/PsCardBlock.vue'
 import PsCardFooter from '@/components/PsCardFooter.vue'
+import Alert from '@/components/Alert.vue'
 import BannerPromo from '@/components/BannerPromo.vue'
 
 const shopContext = JSON.parse(context)
@@ -111,7 +119,8 @@ export default {
         PsCard,
         PsCardHeader,
         PsCardBlock,
-        PsCardFooter
+        PsCardFooter,
+        Alert
     },
     data: function () {
         return {

@@ -62,7 +62,7 @@ class AdminAjaxPs_buybuttonliteController extends ModuleAdminController
     public function getSqlQuery($query, $id_lang)
     {
         $sql = new DbQuery();
-        $sql->select('p.`id_product`, pa.`id_product_attribute`, pl.`name`, p.`reference`');
+        $sql->select('p.`id_product`, pa.`id_product_attribute`, pl.`name`, p.`reference`, p.`customizable`');
         $sql->from('product', 'p');
         $sql->join(Shop::addSqlAssociation('product', 'p'));
         $sql->leftJoin('product_lang', 'pl', '

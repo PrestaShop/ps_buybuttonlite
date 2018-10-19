@@ -156,6 +156,7 @@ class Ps_BuybuttonLite extends Module
             'copyToClipboard' => $this->trans('Copy to clipboard', array(), 'Modules.Buybuttonlite.Admin'),
             'linkPlaceholder' => $this->trans('Please select a product and an action', array(), 'Modules.Buybuttonlite.Admin'),
             'linkCopied' => $this->trans('Link copied to clipboard', array(), 'Modules.Buybuttonlite.Admin'),
+            'alertCustomizableProduct' => $this->trans('The selected product is customizable, if it is added to cart through that shareable link, it won\'t get any customization. We recommend to share product page link instead.', array(), 'Modules.Buybuttonlite.Admin'),
         );
 
         $bannerPromoTranslations = array(
