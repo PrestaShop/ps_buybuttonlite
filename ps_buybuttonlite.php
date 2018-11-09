@@ -38,7 +38,7 @@ class Ps_BuybuttonLite extends Module
         $this->author = 'PrestaShop';
         $this->need_instance = 0;
 
-        $this->module_key = 'bab535c26e031e9d224c0d128e063283';
+        $this->module_key = '80c29e3aad22cbb2a9297b6cb4e8fff8';
 
         $this->bootstrap = true;
 
