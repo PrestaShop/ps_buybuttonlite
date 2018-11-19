@@ -62,7 +62,7 @@ class AdminAjaxPs_buybuttonliteController extends ModuleAdminController
     public function getSqlQuery($query, $id_lang)
     {
         $sql = new DbQuery();
-        $sql->select('p.`id_product`, pa.`id_product_attribute`, pl.`name`, p.`reference`');
+        $sql->select('p.`id_product`, pa.`id_product_attribute`, pl.`name`, p.`reference`, p.`customizable`');
         $sql->from('product', 'p');
         $sql->join(Shop::addSqlAssociation('product', 'p'));
         $sql->leftJoin('product_lang', 'pl', '
@@ -92,7 +92,8 @@ class AdminAjaxPs_buybuttonliteController extends ModuleAdminController
     public function getProductImage($id_product)
     {
         $product = new Product($id_product);
-        $link_rewrite = $product->link_rewrite;
+
+        $link_rewrite = $this->checkLinkRewrite($product->link_rewrite);
 
         $link = new Link();
 
@@ -119,7 +120,8 @@ class AdminAjaxPs_buybuttonliteController extends ModuleAdminController
         $id_shop = $context->shop->id;
 
         $product = new Product($id_product);
-        $link_rewrite = $product->link_rewrite;
+
+        $link_rewrite = $this->checkLinkRewrite($product->link_rewrite);
 
         $link = new Link();
 
@@ -176,5 +178,24 @@ class AdminAjaxPs_buybuttonliteController extends ModuleAdminController
         $attributesList = implode($attributes, ', ');
 
         return $attributesList;
+    }
+
+    /**
+     * Allow to check if $link_rewrite is an array or not and only return a valid value
+     *
+     * @param array|string $link_rewrite
+     *
+     * @return string
+     */
+    private function checkLinkRewrite($link_rewrite)
+    {
+        $link_rewrite = $link_rewrite;
+
+        if (is_array($link_rewrite)) {
+            $filteredArray = array_filter($link_rewrite);
+            $link_rewrite = current($filteredArray);
+        }
+
+        return $link_rewrite;
     }
 }

@@ -28,9 +28,15 @@
 
 /* OVERRIDE BUTTON */
 .el-button {
+    display: inline-block !important;
+    text-align: center !important;
+    vertical-align: middle !important;
     font-weight: 600 !important;
-    border-radius: 2px !important;
+    border-radius: .063rem !important;
+    padding: 6px 13.408px !important;
+    padding: .375rem .838rem !important;
     font-size: .875rem !important;
+    line-height: 1.5 !important;
 }
 
 .el-button--text {
@@ -294,10 +300,6 @@
     width: 70px;
 }
 
-.ps-card-header .material-icons {
-    vertical-align: text-top;
-}
-
 .el-select-dropdown {
     border: 1px solid #bbcdd2 !important;
     border-radius: unset !important;
@@ -338,20 +340,35 @@
     box-shadow: 1px 1px 2px 0 rgba(0,0,0,.3) !important;
 }
 
-.d-flex {
-    display: -webkit-box!important;
-    display: -ms-flexbox!important;
-    display: flex!important;
+.el-dropdown-menu {
+    border: 1px solid #bbcdd2 !important;
+    border-radius: unset !important;
+    box-shadow: 1px 1px 2px 0 rgba(0,0,0,.3) !important;
+    color: #576c72 !important;
+    margin-top: 0px !important;
+    padding: 5.008px 0 !important;
+    padding: .313rem 0 !important;
+    min-width: 250px !important;
+    min-width: 15.625rem !important;
+}
+
+.el-dropdown-menu__item:hover {
+    color: #fff !important;
+    background-color: #25b9d7 !important;
+}
+
+.el-pagination.is-background .el-pager li:not(.disabled).active {
+    background-color: #19a9c6 !important;
+}
+
+.el-pagination.is-background .el-pager li:not(.disabled):hover {
+    color: #19a9c6 !important;
 }
 
 .justify-content-end {
-    -webkit-box-pack: end!important;
-    -ms-flex-pack: end!important;
-    justify-content: flex-end!important;
+    float: right;
 }
 
 .justify-content-start {
-    -webkit-box-pack: start!important;
-    -ms-flex-pack: start!important;
-    justify-content: flex-start!important;
+    float: left;
 }

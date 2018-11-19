@@ -27,6 +27,7 @@
 */
 
 .form-link > .el-form-item__content {
+    margin-top: 10px !important;
     line-height: initial !important;
     max-width: 50%;
     text-align: justify;

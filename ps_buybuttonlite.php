@@ -38,7 +38,7 @@ class Ps_BuybuttonLite extends Module
         $this->author = 'PrestaShop';
         $this->need_instance = 0;
 
-        $this->module_key = 'bab535c26e031e9d224c0d128e063283';
+        $this->module_key = '80c29e3aad22cbb2a9297b6cb4e8fff8';
 
         $this->bootstrap = true;
 
@@ -156,6 +156,7 @@ class Ps_BuybuttonLite extends Module
             'copyToClipboard' => $this->trans('Copy to clipboard', array(), 'Admin.Global'),
             'linkPlaceholder' => $this->trans('Please select a product and an action', array(), 'Modules.Buybuttonlite.Admin'),
             'linkCopied' => $this->trans('Link copied to clipboard', array(), 'Modules.Buybuttonlite.Admin'),
+            'alertCustomizableProduct' => $this->trans('The selected product is customizable, if it is added to cart through that shareable link, it won\'t get any customization. We recommend to share product page link instead.', array(), 'Modules.Buybuttonlite.Admin'),
         );
 
         $bannerPromoTranslations = array(

@@ -17,8 +17,10 @@ export default {
     margin-bottom: 12px;
     margin-bottom: .75rem;
     background-color: #fff;
-    border: 1px solid #e5e5e5;
-    border-radius: 0;
+    border: 1px solid #dbe6e9;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 0 4px 0 rgba(0,0,0,.06);
     font-family: Open Sans,Helvetica,Arial,sans-serif !important;
 }
 </style>
