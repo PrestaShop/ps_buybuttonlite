@@ -45,16 +45,16 @@ class Ps_BuybuttonLite extends Module
 
         $this->controllerAdmin = 'AdminAjaxPs_buybuttonlite';
 
-        $this->displayName = $this->trans('Buy button lite', array(), 'Modules.Buybuttonlite.Admin');
-        $this->description = $this->trans('Increase your conversation rate and boost your sales, generate links and add them to your content so that visitors can easily proceed to checkout', array(), 'Modules.Buybuttonlite.Admin');
+        $this->displayName = $this->trans('Buy button lite', [], 'Modules.Buybuttonlite.Admin');
+        $this->description = $this->trans('Increase your conversation rate and boost your sales, generate links and add them to your content so that visitors can easily proceed to checkout', [], 'Modules.Buybuttonlite.Admin');
         $this->ps_version = (bool)version_compare(_PS_VERSION_, '1.7', '>=');
 
         // Settings paths
         $this->css_path = $this->_path.'views/css/';
 
         // Confirm uninstall
-        $this->confirmUninstall = $this->trans('Are you sure you want to uninstall this module?', array(), 'Modules.Legalcompliance.Admin');
-        $this->ps_versions_compliancy = array('min' => '1.7', 'max' => _PS_VERSION_);
+        $this->confirmUninstall = $this->trans('Are you sure you want to uninstall this module?', [], 'Modules.Legalcompliance.Admin');
+        $this->ps_versions_compliancy = ['min' => '1.7', 'max' => _PS_VERSION_];
     }
 
     /**
@@ -93,7 +93,7 @@ class Ps_BuybuttonLite extends Module
         $tab = new Tab();
         $tab->class_name = $this->controllerAdmin;
         $tab->active = 1;
-        $tab->name = array();
+        $tab->name = [];
         foreach (Language::getLanguages(true) as $lang) {
             $tab->name[$lang['id_lang']] = $this->name;
         }
@@ -128,12 +128,12 @@ class Ps_BuybuttonLite extends Module
      */
     public function loadAsset()
     {
-        $css = array(
+        $css = [
             'https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.4.7/theme-chalk/index.css',
             $this->css_path.'override-element-ui.css',
             $this->css_path.'app.css',
             $this->css_path.'back.css',
-        );
+        ];
 
         return $this->context->controller->addCSS($css, 'all');
     }
@@ -150,38 +150,38 @@ class Ps_BuybuttonLite extends Module
 
         $trackingAddonsUrl = $this->getAddonsTrackingUrl();
 
-        $confTranslations = array(
-            'selectProduct' => $this->trans('Select Product', array(), 'Modules.Buybuttonlite.Admin'),
-            'searchProduct' => $this->trans('Search for a product', array(), 'Admin.Orderscustomers.Feature'),
-            'action' => $this->trans('Action', array(), 'Admin.Global'),
-            'sharableLink' => $this->trans('Get sharable link', array(), 'Modules.Buybuttonlite.Admin'),
-            'errorFormSelectProduct' => $this->trans('Please select a product', array(), 'Modules.Buybuttonlite.Admin'),
-            'errorFormSelectAction' => $this->trans('Please select an action', array(), 'Modules.Buybuttonlite.Admin'),
-            'copyToClipboard' => $this->trans('Copy to clipboard', array(), 'Modules.Buybuttonlite.Admin'),
-            'linkPlaceholder' => $this->trans('Please select a product and an action', array(), 'Modules.Buybuttonlite.Admin'),
-            'linkCopied' => $this->trans('Link copied to clipboard', array(), 'Modules.Buybuttonlite.Admin'),
-        );
+        $confTranslations = [
+            'selectProduct' => $this->trans('Select Product', [], 'Modules.Buybuttonlite.Admin'),
+            'searchProduct' => $this->trans('Search for a product', [], 'Admin.Orderscustomers.Feature'),
+            'action' => $this->trans('Action', [], 'Admin.Global'),
+            'sharableLink' => $this->trans('Get sharable link', [], 'Modules.Buybuttonlite.Admin'),
+            'errorFormSelectProduct' => $this->trans('Please select a product', [], 'Modules.Buybuttonlite.Admin'),
+            'errorFormSelectAction' => $this->trans('Please select an action', [], 'Modules.Buybuttonlite.Admin'),
+            'copyToClipboard' => $this->trans('Copy to clipboard', [], 'Modules.Buybuttonlite.Admin'),
+            'linkPlaceholder' => $this->trans('Please select a product and an action', [], 'Modules.Buybuttonlite.Admin'),
+            'linkCopied' => $this->trans('Link copied to clipboard', [], 'Modules.Buybuttonlite.Admin'),
+        ];
 
-        $bannerPromoTranslations = array(
-            'copyToClipboard' => $this->trans('Copy to clipboard', array(), 'Admin.Global'),
-            'discover' => $this->trans('Discover', array(), 'Admin.Modules.Feature'),
-            'screenshots' => $this->trans('Screenshots', array(), 'Modules.Buybuttonlite.Admin'),
-            'goFurther' => $this->trans('Want to go further', array(), 'Modules.Buybuttonlite.Admin'),
-            'addonsMarketplace' => $this->trans('PrestaShop Addons Marketplace', array(), 'Admin.Modules.Feature'),
-            'discoverOn' => $this->trans('Discover on Addons Marketplace', array(), 'Admin.Modules.Feature'),
-            'developedBy' => $this->trans('Developed by PrestaShop', array(), 'Admin.Global')
-        );
+        $bannerPromoTranslations = [
+            'copyToClipboard' => $this->trans('Copy to clipboard', [], 'Admin.Global'),
+            'discover' => $this->trans('Discover', [], 'Admin.Modules.Feature'),
+            'screenshots' => $this->trans('Screenshots', [], 'Modules.Buybuttonlite.Admin'),
+            'goFurther' => $this->trans('Want to go further', [], 'Modules.Buybuttonlite.Admin'),
+            'addonsMarketplace' => $this->trans('PrestaShop Addons Marketplace', [], 'Admin.Modules.Feature'),
+            'discoverOn' => $this->trans('Discover on Addons Marketplace', [], 'Admin.Modules.Feature'),
+            'developedBy' => $this->trans('Developed by PrestaShop', [], 'Admin.Global')
+        ];
 
-        Media::addJsDef(array(
+        Media::addJsDef([
             'context' => json_encode(Context::getContext()),
             'confTranslations' => json_encode($confTranslations),
             'bannerPromoTranslations' => json_encode($bannerPromoTranslations),
             'adminAjaxController' => $adminAjaxController,
             'trackingAddonsLink' => $trackingAddonsUrl,
-            'redirectControllerUrl' => preg_replace('#&id_lang=[0-9]{1,2}$#', '', $this->context->link->getModuleLink($this->name, 'RedirectManager', array(), true)),
+            'redirectControllerUrl' => preg_replace('#&id_lang=[0-9]{1,2}$#', '', $this->context->link->getModuleLink($this->name, 'RedirectManager', [], true)),
             'psBaseUrl' => Tools::getHttpHost(true),
             'psVersion' => _PS_VERSION_
-        ));
+        ]);
 
         $this->context->smarty->assign('modulePath', $this->_path);
 
@@ -197,7 +197,7 @@ class Ps_BuybuttonLite extends Module
      */
     public function getAddonsTrackingUrl()
     {
-        $availableTrackingLanguage = array('en', 'fr', 'es', 'it', 'de', 'nl', 'pt', 'pl', 'ru');
+        $availableTrackingLanguage = ['en', 'fr', 'es', 'it', 'de', 'nl', 'pt', 'pl', 'ru'];
 
         $iso_code = 'en';
         if (in_array($this->context->language->iso_code, $availableTrackingLanguage)) {
