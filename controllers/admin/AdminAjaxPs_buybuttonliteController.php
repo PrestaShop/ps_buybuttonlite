@@ -31,7 +31,7 @@ class AdminAjaxPs_buybuttonliteController extends ModuleAdminController
 
         $result = $this->getSqlQuery($query, $id_lang);
 
-        if (!$result) {
+        if ( ! $result) {
             return false;
         }
 
@@ -145,7 +145,7 @@ class AdminAjaxPs_buybuttonliteController extends ModuleAdminController
 
         $attributes = Product::getAttributesInformationsByProduct($id_product);
 
-        return !empty($attributes);
+        return ! empty($attributes);
     }
 
     /**
