@@ -1,6 +1,6 @@
 <?php
 /**
-* 2007-2018 PrestaShop
+* 2007-2018 PrestaShop.
 *
 * DISCLAIMER
 *
@@ -16,7 +16,7 @@
 class AdminAjaxPs_buybuttonliteController extends ModuleAdminController
 {
     /**
-     * Return product / product list matching the search
+     * Return product / product list matching the search.
      *
      * @param string $query Product to search
      *
@@ -51,7 +51,7 @@ class AdminAjaxPs_buybuttonliteController extends ModuleAdminController
     }
 
     /**
-     * Build the sql querry and return result
+     * Build the sql querry and return result.
      *
      * @param string $query Product to search
      * @param int $id_lang
@@ -82,7 +82,7 @@ class AdminAjaxPs_buybuttonliteController extends ModuleAdminController
     }
 
     /**
-     * Get product cover image
+     * Get product cover image.
      *
      * @param int $id_product id product
      *
@@ -104,7 +104,7 @@ class AdminAjaxPs_buybuttonliteController extends ModuleAdminController
     }
 
     /**
-     * Get product attribute image
+     * Get product attribute image.
      *
      * @param int $id_product id product
      * @param int $id_product_attribute id product attribute
@@ -131,7 +131,7 @@ class AdminAjaxPs_buybuttonliteController extends ModuleAdminController
     }
 
     /**
-     * Check if product has combinations
+     * Check if product has combinations.
      *
      * @param int $id_product id product
      *
@@ -149,7 +149,7 @@ class AdminAjaxPs_buybuttonliteController extends ModuleAdminController
     }
 
     /**
-     * Get attributes assicuate to a product attribute id
+     * Get attributes assicuate to a product attribute id.
      *
      * @param int $id_product_attribute id product attribute
      *

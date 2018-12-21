@@ -1,6 +1,6 @@
 <?php
 /**
-* 2007-2018 PrestaShop
+* 2007-2018 PrestaShop.
 *
 * DISCLAIMER
 *
@@ -40,7 +40,7 @@ class ps_buybuttonliteRedirectManagerModuleFrontController extends ModuleFrontCo
     }
 
     /**
-     * Redirect to the cart with the product
+     * Redirect to the cart with the product.
      *
      * @param int $idProduct id of the product to add in the cart
      * @param int $idProductAttribute id of the product attribute if the product is a combination
@@ -53,7 +53,7 @@ class ps_buybuttonliteRedirectManagerModuleFrontController extends ModuleFrontCo
     }
 
     /**
-     * Redirect to the checkout page with the product
+     * Redirect to the checkout page with the product.
      *
      * @param int $idProduct id of the product to add in the cart
      * @param int $idProductAttribute id of the product attribute if the product is a combination

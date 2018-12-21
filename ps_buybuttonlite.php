@@ -1,6 +1,6 @@
 <?php
 /**
-* 2007-2018 PrestaShop
+* 2007-2018 PrestaShop.
 *
 * NOTICE OF LICENSE
 *
@@ -58,7 +58,7 @@ class Ps_BuybuttonLite extends Module
     }
 
     /**
-     * install()
+     * install().
      *
      * @param none
      *
@@ -70,7 +70,7 @@ class Ps_BuybuttonLite extends Module
     }
 
     /**
-     * uninstall()
+     * uninstall().
      *
      * @param none
      *
@@ -82,7 +82,7 @@ class Ps_BuybuttonLite extends Module
     }
 
     /**
-     * Register admin controller (ajax call)
+     * Register admin controller (ajax call).
      *
      * @param none
      *
@@ -104,7 +104,7 @@ class Ps_BuybuttonLite extends Module
     }
 
     /**
-     * Unregister admin controller
+     * Unregister admin controller.
      *
      * @param none
      *
@@ -120,7 +120,7 @@ class Ps_BuybuttonLite extends Module
     }
 
     /**
-     * Load dependencies
+     * Load dependencies.
      *
      * @param none
      *
@@ -139,7 +139,7 @@ class Ps_BuybuttonLite extends Module
     }
 
     /**
-     * Load the configuration form
+     * Load the configuration form.
      */
     public function getContent()
     {
@@ -189,7 +189,7 @@ class Ps_BuybuttonLite extends Module
     }
 
     /**
-     * Generate addons url tracking depending the language
+     * Generate addons url tracking depending the language.
      *
      * @param none
      *
