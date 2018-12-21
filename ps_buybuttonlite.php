@@ -61,6 +61,7 @@ class Ps_BuybuttonLite extends Module
      * install()
      *
      * @param none
+     *
      * @return bool
      */
     public function install()
@@ -72,6 +73,7 @@ class Ps_BuybuttonLite extends Module
      * uninstall()
      *
      * @param none
+     *
      * @return bool
      */
     public function uninstall()
@@ -83,6 +85,7 @@ class Ps_BuybuttonLite extends Module
      * Register admin controller (ajax call)
      *
      * @param none
+     *
      * @return bool
      */
     public function installTab()
@@ -104,6 +107,7 @@ class Ps_BuybuttonLite extends Module
      * Unregister admin controller
      *
      * @param none
+     *
      * @return bool
      */
     public function uninstallTab()
@@ -119,6 +123,7 @@ class Ps_BuybuttonLite extends Module
      * Load dependencies
      *
      * @param none
+     *
      * @return bool
      */
     public function loadAsset()
@@ -187,6 +192,7 @@ class Ps_BuybuttonLite extends Module
      * Generate addons url tracking depending the language
      *
      * @param none
+     *
      * @return string url tracking addons
      */
     public function getAddonsTrackingUrl()
