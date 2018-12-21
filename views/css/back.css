@@ -34,7 +34,7 @@
     margin-left: 200px;
 }
 .generated-link {
-    color: #25B9D7;
+    color: #25b9d7;
     text-decoration: underline;
     cursor: pointer;
     font-weight: 700;
@@ -74,7 +74,7 @@
     top: 20%;
 }
 .material-icons.red {
-    color: #C45C67;
+    color: #c45c67;
     cursor: pointer;
 }
 .el-autocomplete-suggestion li {
