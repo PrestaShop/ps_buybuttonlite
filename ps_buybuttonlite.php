@@ -169,7 +169,7 @@ class Ps_BuybuttonLite extends Module
             'goFurther' => $this->trans('Want to go further', [], 'Modules.Buybuttonlite.Admin'),
             'addonsMarketplace' => $this->trans('PrestaShop Addons Marketplace', [], 'Admin.Modules.Feature'),
             'discoverOn' => $this->trans('Discover on Addons Marketplace', [], 'Admin.Modules.Feature'),
-            'developedBy' => $this->trans('Developed by PrestaShop', [], 'Admin.Global')
+            'developedBy' => $this->trans('Developed by PrestaShop', [], 'Admin.Global'),
         ];
 
         Media::addJsDef([
@@ -180,7 +180,7 @@ class Ps_BuybuttonLite extends Module
             'trackingAddonsLink' => $trackingAddonsUrl,
             'redirectControllerUrl' => preg_replace('#&id_lang=[0-9]{1,2}$#', '', $this->context->link->getModuleLink($this->name, 'RedirectManager', [], true)),
             'psBaseUrl' => Tools::getHttpHost(true),
-            'psVersion' => _PS_VERSION_
+            'psVersion' => _PS_VERSION_,
         ]);
 
         $this->context->smarty->assign('modulePath', $this->_path);
