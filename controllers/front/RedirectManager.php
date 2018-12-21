@@ -29,12 +29,15 @@ class ps_buybuttonliteRedirectManagerModuleFrontController extends ModuleFrontCo
         switch ($action) {
             case self::REDIRECT_TO_CART:
                 $this->redirectToCart($idProduct, $idProductAttribute);
+
                 break;
             case self::REDIRECT_TO_CHECKOUT:
                 $this->redirectToCheckout($idProduct, $idProductAttribute);
+
                 break;
             default:
                 $this->redirectToCart($idProduct, $idProductAttribute);
+
                 break;
         }
     }
