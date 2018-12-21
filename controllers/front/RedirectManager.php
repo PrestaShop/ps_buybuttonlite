@@ -53,7 +53,7 @@ class ps_buybuttonliteRedirectManagerModuleFrontController extends ModuleFrontCo
      */
     public function redirectToCart($idProduct, $idProductAttribute = null)
     {
-        Tools::redirect('index.php?controller=cart&update=1&id_product='.$idProduct.'&id_product_attribute='.$idProductAttribute);
+        Tools::redirect('index.php?controller=cart&update=1&id_product=' . $idProduct . '&id_product_attribute=' . $idProductAttribute);
     }
 
     /**
