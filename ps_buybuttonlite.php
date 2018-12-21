@@ -47,7 +47,7 @@ class Ps_BuybuttonLite extends Module
 
         $this->displayName = $this->trans('Buy button lite', [], 'Modules.Buybuttonlite.Admin');
         $this->description = $this->trans('Increase your conversation rate and boost your sales, generate links and add them to your content so that visitors can easily proceed to checkout', [], 'Modules.Buybuttonlite.Admin');
-        $this->ps_version = (bool)version_compare(_PS_VERSION_, '1.7', '>=');
+        $this->ps_version = (bool) version_compare(_PS_VERSION_, '1.7', '>=');
 
         // Settings paths
         $this->css_path = $this->_path.'views/css/';
@@ -112,7 +112,7 @@ class Ps_BuybuttonLite extends Module
      */
     public function uninstallTab()
     {
-        $id_tab = (int)Tab::getIdFromClassName($this->controllerAdmin);
+        $id_tab = (int) Tab::getIdFromClassName($this->controllerAdmin);
         $tab = new Tab($id_tab);
         if (Validate::isLoadedObject($tab)) {
             return $tab->delete();
