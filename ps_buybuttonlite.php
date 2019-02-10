@@ -150,7 +150,7 @@ class Ps_BuybuttonLite extends Module
             'selectProduct' => $this->trans('Select a product', array(), 'Modules.Buybuttonlite.Admin'),
             'searchProduct' => $this->trans('Search for a product', array(), 'Admin.Orderscustomers.Feature'),
             'action' => $this->trans('Action', array(), 'Admin.Global'),
-            'sharableLink' => $this->trans('Get sharable link', array(), 'Modules.Buybuttonlite.Admin'),
+            'sharableLink' => $this->trans('Get generated link', array(), 'Modules.Buybuttonlite.Admin'),
             'errorFormSelectProduct' => $this->trans('Please select a product', array(), 'Modules.Buybuttonlite.Admin'),
             'errorFormSelectAction' => $this->trans('Please select an action', array(), 'Modules.Buybuttonlite.Admin'),
             'copyToClipboard' => $this->trans('Copy to clipboard', array(), 'Admin.Global'),
