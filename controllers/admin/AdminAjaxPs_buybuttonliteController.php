@@ -189,8 +189,6 @@ class AdminAjaxPs_buybuttonliteController extends ModuleAdminController
      */
     private function checkLinkRewrite($link_rewrite)
     {
-        $link_rewrite = $link_rewrite;
-
         if (is_array($link_rewrite)) {
             $filteredArray = array_filter($link_rewrite);
             $link_rewrite = current($filteredArray);
