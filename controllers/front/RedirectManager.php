@@ -23,9 +23,9 @@ class ps_buybuttonliteRedirectManagerModuleFrontController extends ModuleFrontCo
     {
         parent::initContent();
 
-        $idProduct = (int)Tools::getValue('id_product');
-        $idProductAttribute = (int)Tools::getValue('id_product_attribute');
-        $action = (int)Tools::getValue('action');
+        $idProduct = (int) Tools::getValue('id_product');
+        $idProductAttribute = (int) Tools::getValue('id_product_attribute');
+        $action = (int) Tools::getValue('action');
 
         $this->addProductToCart($idProduct, $idProductAttribute);
 
