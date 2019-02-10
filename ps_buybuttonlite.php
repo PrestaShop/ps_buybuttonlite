@@ -51,7 +51,7 @@ class Ps_BuybuttonLite extends Module
         $this->ps_version = (bool)version_compare(_PS_VERSION_, '1.7', '>=');
 
         // Settings paths
-        $this->css_path = $this->_path.'views/css/';
+        $this->css_path = $this->_path . 'views/css/';
 
         // Confirm uninstall
         $this->confirmUninstall = $this->trans('Are you sure you want to uninstall this module?', array(), 'Modules.Legalcompliance.Admin');
@@ -126,9 +126,9 @@ class Ps_BuybuttonLite extends Module
     {
         $css = array(
             'https://cdnjs.cloudflare.com/ajax/libs/element-ui/2.4.7/theme-chalk/index.css',
-            $this->css_path.'override-element-ui.css',
-            $this->css_path.'app.css',
-            $this->css_path.'back.css',
+            $this->css_path . 'override-element-ui.css',
+            $this->css_path . 'app.css',
+            $this->css_path . 'back.css',
         );
 
         return $this->context->controller->addCSS($css, 'all');
@@ -182,7 +182,7 @@ class Ps_BuybuttonLite extends Module
 
         $this->context->smarty->assign('modulePath', $this->_path);
 
-        return $this->context->smarty->fetch($this->local_path.'views/templates/admin/app.tpl');
+        return $this->context->smarty->fetch($this->local_path . 'views/templates/admin/app.tpl');
     }
 
     /**
@@ -200,6 +200,6 @@ class Ps_BuybuttonLite extends Module
             $iso_code = $this->context->language->iso_code;
         }
 
-        return 'https://addons.prestashop.com/'.$iso_code.'/blog-forum-actualites/41139-buy-button.html?utm_source=back-office&utm_medium=native-module&utm_campaign=back-office-'.strtoupper($iso_code).'&utm_content=Permalink';
+        return 'https://addons.prestashop.com/' . $iso_code . '/blog-forum-actualites/41139-buy-button.html?utm_source=back-office&utm_medium=native-module&utm_campaign=back-office-' . strtoupper($iso_code) . '&utm_content=Permalink';
     }
 }

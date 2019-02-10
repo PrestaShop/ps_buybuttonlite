@@ -102,7 +102,7 @@ class AdminAjaxPs_buybuttonliteController extends ModuleAdminController
 
         $image_link = $link->getImageLink($link_rewrite, $id_image, ImageType::getFormattedName('small'));
 
-        return Tools::getProtocol().$image_link;
+        return Tools::getProtocol() . $image_link;
     }
 
     /**
@@ -130,7 +130,7 @@ class AdminAjaxPs_buybuttonliteController extends ModuleAdminController
 
         $image_link = $link->getImageLink($link_rewrite, $id_image, ImageType::getFormattedName('small'));
 
-        return Tools::getProtocol().$image_link;
+        return Tools::getProtocol() . $image_link;
     }
 
     /**
