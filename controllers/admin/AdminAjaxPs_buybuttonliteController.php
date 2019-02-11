@@ -142,7 +142,7 @@ class AdminAjaxPs_buybuttonliteController extends ModuleAdminController
      */
     public function hasCombinations($id_product)
     {
-        if (is_null($id_product) || 0 >= $id_product) {
+        if (null === $id_product || 0 >= $id_product) {
             return false;
         }
 
