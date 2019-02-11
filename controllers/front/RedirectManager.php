@@ -17,6 +17,7 @@
 class ps_buybuttonliteRedirectManagerModuleFrontController extends ModuleFrontController
 {
     const REDIRECT_TO_CART = 1;
+
     const REDIRECT_TO_CHECKOUT = 2;
 
     public function initContent()
