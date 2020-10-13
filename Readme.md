@@ -2,7 +2,7 @@
 
 ## About
 
-Create a product checkout redirect link to post on a blog or any social media
+Improve your conversion rate, display product links that ease the shopping on your store.
 
 ## Multistore compatibility
 
