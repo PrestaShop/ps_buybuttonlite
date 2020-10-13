@@ -47,7 +47,7 @@ class Ps_BuybuttonLite extends Module
         $this->controllerAdmin = 'AdminAjaxPs_buybuttonlite';
 
         $this->displayName = $this->trans('Buy button lite', array(), 'Modules.Buybuttonlite.Admin');
-        $this->description = $this->trans('Increase your conversion rate and boost your sales, generate links and add them to your content so that visitors can easily proceed to checkout', array(), 'Modules.Buybuttonlite.Admin');
+        $this->description = $this->trans('Improve your conversion rate, display product links that ease the shopping on your store.', array(), 'Modules.Buybuttonlite.Admin');
         $this->ps_version = (bool) version_compare(_PS_VERSION_, '1.7', '>=');
 
         // Settings paths
