@@ -172,10 +172,10 @@ class AdminAjaxPs_buybuttonliteController extends ModuleAdminController
 
         $attributes = [];
         foreach ($results as $attribute) {
-            $attributes[] = implode($attribute, ' - ');
+            $attributes[] = implode(' - ', $attribute);
         }
 
-        $attributesList = implode($attributes, ', ');
+        $attributesList = implode(', ', $attributes);
 
         return $attributesList;
     }
