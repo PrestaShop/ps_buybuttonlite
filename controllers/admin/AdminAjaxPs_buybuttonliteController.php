@@ -126,6 +126,9 @@ class AdminAjaxPs_buybuttonliteController extends ModuleAdminController
         $link = new Link();
 
         $image_data = Image::getBestImageAttribute($id_shop, $id_lang, $id_product, $id_product_attribute);
+        if (!is_array($image_data) || !isset($image_data['id_image'])) {
+            return $this->getProductImage($id_product);
+        }
         $id_image = $image_data['id_image'];
 
         $image_link = $link->getImageLink($link_rewrite, $id_image, ImageType::getFormattedName('small'));
