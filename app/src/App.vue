@@ -149,7 +149,7 @@ export default {
         validateForm: function (formName) {
             this.$refs[formName].validate((valid) => {
                 if (valid) {
-                    this.copyToClopboard(this.redirectControllerUrl + '?id_product=' + this.form.selectedProduct.id_product + '&action=' + this.form.selectedAction + '&id_product_attribute=' + this.form.selectedProduct.id_product_attribute)
+                    this.copyToClipboard(this.redirectControllerUrl + '?id_product=' + this.form.selectedProduct.id_product + '&action=' + this.form.selectedAction + '&id_product_attribute=' + this.form.selectedProduct.id_product_attribute)
                 } else {
                     return false
                 }
@@ -174,7 +174,7 @@ export default {
         removeSelectedProduct: function () {
             this.form.selectedProduct = ''
         },
-        copyToClopboard: function (payload) {
+        copyToClipboard: function (payload) {
             const el = document.createElement('textarea')
             el.value = payload
             el.setAttribute('readonly', '')
