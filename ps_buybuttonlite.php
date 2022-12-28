@@ -144,8 +144,6 @@ class Ps_BuybuttonLite extends Module
         $link = new Link();
         $adminAjaxController = $link->getAdminLink($this->controllerAdmin);
 
-        $trackingAddonsUrl = $this->getAddonsTrackingUrl();
-
         $confTranslations = array(
             'selectProduct' => $this->trans('Select a product', array(), 'Modules.Buybuttonlite.Admin'),
             'searchProduct' => $this->trans('Search for a product', array(), 'Admin.Orderscustomers.Feature'),
@@ -164,7 +162,6 @@ class Ps_BuybuttonLite extends Module
             'discover' => $this->trans('Discover', array(), 'Admin.Modules.Feature'),
             'screenshots' => $this->trans('Screenshots', array(), 'Admin.Global'),
             'goFurther' => $this->trans('Want to go further?', array(), 'Modules.Buybuttonlite.Admin'),
-            'addonsMarketplace' => $this->trans('PrestaShop Addons Marketplace', array(), 'Admin.Modules.Feature'),
             'discoverOn' => $this->trans('Discover on Addons Marketplace', array(), 'Admin.Modules.Feature'),
             'developedBy' => $this->trans('Developed by PrestaShop', array(), 'Admin.Global'),
         );
@@ -174,7 +171,6 @@ class Ps_BuybuttonLite extends Module
             'confTranslations' => json_encode($confTranslations),
             'bannerPromoTranslations' => json_encode($bannerPromoTranslations),
             'adminAjaxController' => $adminAjaxController,
-            'trackingAddonsLink' => $trackingAddonsUrl,
             'redirectControllerUrl' => preg_replace('#&id_lang=[0-9]{1,2}$#', '', $this->context->link->getModuleLink($this->name, 'RedirectManager', array(), true)),
             'psBaseUrl' => Tools::getHttpHost(true),
             'psVersion' => _PS_VERSION_,
@@ -183,23 +179,5 @@ class Ps_BuybuttonLite extends Module
         $this->context->smarty->assign('modulePath', $this->_path);
 
         return $this->context->smarty->fetch($this->local_path.'views/templates/admin/app.tpl');
-    }
-
-    /**
-     * Generate addons url tracking depending the language
-     *
-     * @param none
-     * @return string url tracking addons
-     */
-    public function getAddonsTrackingUrl()
-    {
-        $availableTrackingLanguage = array('en', 'fr', 'es', 'it', 'de', 'nl', 'pt', 'pl', 'ru');
-
-        $iso_code = 'en';
-        if (in_array($this->context->language->iso_code, $availableTrackingLanguage)) {
-            $iso_code = $this->context->language->iso_code;
-        }
-
-        return 'https://addons.prestashop.com/'.$iso_code.'/blog-forum-actualites/41139-buy-button.html?utm_source=back-office&utm_medium=native-module&utm_campaign=back-office-'.strtoupper($iso_code).'&utm_content=Permalink';
     }
 }
