@@ -73,30 +73,6 @@
             </el-col>
         </el-row>
 
-        <BannerPromo
-            :idProductAddons="41139"
-            :isoCode="context.country.iso_code"
-            :isoLang="context.language.iso_code"
-            :psVersion="ps_version"
-            :trackingAddonsLink="trackingAddonsLink"
-        >
-            <el-row>
-                <el-col :span="12">
-                    <span class="features"><i class="material-icons">add_circle</i> Card & Button design integration</span>
-                </el-col>
-                <el-col :span="12">
-                    <span class="features"><i class="material-icons">add_circle</i> Overview and Card Manager</span>
-                </el-col>
-            </el-row>
-            <el-row>
-                <el-col :span="12">
-                    <span class="features"><i class="material-icons">add_circle</i> Statistics</span>
-                </el-col>
-                <el-col :span="12">
-                    <span class="features"><i class="material-icons">add_circle</i> Virtual cart on external pages</span>
-                </el-col>
-            </el-row>
-        </BannerPromo>
     </div>
 </template>
 
@@ -107,7 +83,6 @@ import PsCardHeader from '@/components/PsCardHeader.vue'
 import PsCardBlock from '@/components/PsCardBlock.vue'
 import PsCardFooter from '@/components/PsCardFooter.vue'
 import Alert from '@/components/Alert.vue'
-import BannerPromo from '@/components/BannerPromo.vue'
 
 const shopContext = JSON.parse(context)
 const translations = JSON.parse(confTranslations)
@@ -115,7 +90,6 @@ const translations = JSON.parse(confTranslations)
 export default {
     name: 'configuration',
     components: {
-        BannerPromo,
         PsCard,
         PsCardHeader,
         PsCardBlock,
@@ -139,8 +113,7 @@ export default {
             },
             redirectControllerUrl: redirectControllerUrl,
             context: shopContext,
-            translations: translations,
-            trackingAddonsLink: trackingAddonsLink,
+            translations: translations,            
             ps_base_url: psBaseUrl,
             ps_version: psVersion
         }
