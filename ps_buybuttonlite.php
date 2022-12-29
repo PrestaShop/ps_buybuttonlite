@@ -157,19 +157,9 @@ class Ps_BuybuttonLite extends Module
             'alertCustomizableProduct' => $this->trans('The selected product is customizable, if it is added to cart through that shareable link, it won\'t get any customization. We recommend to share product page link instead.', array(), 'Modules.Buybuttonlite.Admin'),
         );
 
-        $bannerPromoTranslations = array(
-            'copyToClipboard' => $this->trans('Copy to clipboard', array(), 'Admin.Global'),
-            'discover' => $this->trans('Discover', array(), 'Admin.Modules.Feature'),
-            'screenshots' => $this->trans('Screenshots', array(), 'Admin.Global'),
-            'goFurther' => $this->trans('Want to go further?', array(), 'Modules.Buybuttonlite.Admin'),
-            'discoverOn' => $this->trans('Discover on Addons Marketplace', array(), 'Admin.Modules.Feature'),
-            'developedBy' => $this->trans('Developed by PrestaShop', array(), 'Admin.Global'),
-        );
-
         Media::addJsDef(array(
             'context' => json_encode(Context::getContext()),
-            'confTranslations' => json_encode($confTranslations),
-            'bannerPromoTranslations' => json_encode($bannerPromoTranslations),
+            'confTranslations' => json_encode($confTranslations),            
             'adminAjaxController' => $adminAjaxController,
             'redirectControllerUrl' => preg_replace('#&id_lang=[0-9]{1,2}$#', '', $this->context->link->getModuleLink($this->name, 'RedirectManager', array(), true)),
             'psBaseUrl' => Tools::getHttpHost(true),
