@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<module>
+<name>ps_buybuttonlite</name>
+    <displayName><![CDATA[Buy button lite]]></displayName>
+    <version><![CDATA[1.0.1]]></version>
+    <description><![CDATA[Improve your conversion rate, display product links that ease the shopping on your store.]]></description>
+    <author><![CDATA[PrestaShop]]></author>
+    <is_configurable>1</is_configurable>
+    <need_instance>0</need_instance>
+    <limited_countries></limited_countries>
+</module>
