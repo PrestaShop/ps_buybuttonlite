@@ -1,6 +1,5 @@
 <template>
     <div class="ps-card-footer clearfix">
-        </slot>
         <div class="justify-content-start">
             <slot name="footerLeft"></slot>
         </div>

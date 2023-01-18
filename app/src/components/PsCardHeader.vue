@@ -1,6 +1,5 @@
 <template>
-    <div class="ps-card-header clearfix">
-        </slot>
+    <div class="ps-card-header clearfix">        
         <div class="justify-content-start">
             <slot name="headerLeft"></slot>
         </div>
